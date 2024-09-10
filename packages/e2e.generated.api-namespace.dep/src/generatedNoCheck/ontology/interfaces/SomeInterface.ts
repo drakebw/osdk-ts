@@ -11,6 +11,7 @@ import type {
   ConvertProps as $ConvertProps,
   DefaultToFalse as $DefaultToFalse,
   FetchPageArgs as $FetchPageArgs,
+  IsAny as $IsAny,
   LinkedType as $LinkedType,
   LinkNames as $LinkNames,
   NullabilityAdherence as $NullabilityAdherence,
@@ -24,7 +25,7 @@ import type {
   ValidToFrom as $ValidToFrom,
 } from '@osdk/client.api';
 
-export type OsdkObjectLinks$SomeInterface = never;
+export type OsdkObjectLinks$SomeInterface = {};
 
 export namespace SomeInterface {
   export type PropertyKeys = 'spt';
@@ -37,35 +38,35 @@ export namespace SomeInterface {
   }
 
   export interface ObjectSet extends $ObjectSet<SomeInterface.Definition, SomeInterface.ObjectSet> {
-    readonly aggregate: <AO extends $AggregateOpts<SomeInterface.Definition>>(
+    readonly aggregate: <const AO extends $AggregateOpts<SomeInterface.Definition>>(
       req: $AggregateOptsThatErrorsAndDisallowsOrderingWithMultipleGroupBy<SomeInterface.Definition, AO>,
     ) => Promise<$AggregationsResults<SomeInterface.Definition, AO>>;
 
-    readonly pivotTo: <L extends $LinkNames<SomeInterface.Definition>>(
+    readonly pivotTo: <const L extends $LinkNames<SomeInterface.Definition>>(
       type: L,
     ) => $LinkedType<SomeInterface.Definition, L>['objectSet'];
 
     readonly fetchPage: <
-      L extends SomeInterface.PropertyKeys,
-      R extends boolean,
+      const L extends SomeInterface.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<SomeInterface.Definition, L, R, A, S>,
     ) => Promise<
       $PageResult<
         SomeInterface.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? SomeInterface.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPageWithErrors: <
-      L extends SomeInterface.PropertyKeys,
-      R extends boolean,
+      const L extends SomeInterface.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<SomeInterface.Definition, L, R, A, S>,
     ) => Promise<
@@ -73,7 +74,7 @@ export namespace SomeInterface {
         $PageResult<
           SomeInterface.OsdkObject<
             (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-            L
+            $IsAny<L> extends true ? SomeInterface.PropertyKeys : L
           >
         >
       >
@@ -88,6 +89,7 @@ export namespace SomeInterface {
     osdkMetadata: typeof $osdkMetadata;
     objectSet: SomeInterface.ObjectSet;
     props: SomeInterface.Props;
+    linksType: OsdkObjectLinks$SomeInterface;
     strictProps: SomeInterface.StrictProps;
     displayName: 'Sum Interface';
     implements: [];
@@ -129,6 +131,7 @@ export const SomeInterface: SomeInterface.Definition = {
   osdkMetadata: $osdkMetadata,
   objectSet: undefined as any,
   props: undefined as any,
+  linksType: undefined as any,
   strictProps: undefined as any,
   apiName: 'com.example.dep.SomeInterface',
   displayName: 'Sum Interface',

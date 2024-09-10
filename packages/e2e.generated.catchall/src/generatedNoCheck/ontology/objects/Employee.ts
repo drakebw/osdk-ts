@@ -12,6 +12,7 @@ import type {
   ConvertProps as $ConvertProps,
   DefaultToFalse as $DefaultToFalse,
   FetchPageArgs as $FetchPageArgs,
+  IsAny as $IsAny,
   LinkedType as $LinkedType,
   LinkNames as $LinkNames,
   NullabilityAdherence as $NullabilityAdherence,
@@ -83,32 +84,32 @@ export namespace Employee {
   }
 
   export interface ObjectSet extends $ObjectSet<Employee.Definition, Employee.ObjectSet> {
-    readonly aggregate: <AO extends $AggregateOpts<Employee.Definition>>(
+    readonly aggregate: <const AO extends $AggregateOpts<Employee.Definition>>(
       req: $AggregateOptsThatErrorsAndDisallowsOrderingWithMultipleGroupBy<Employee.Definition, AO>,
     ) => Promise<$AggregationsResults<Employee.Definition, AO>>;
 
-    readonly pivotTo: <L extends $LinkNames<Employee.Definition>>(
+    readonly pivotTo: <const L extends $LinkNames<Employee.Definition>>(
       type: L,
     ) => $LinkedType<Employee.Definition, L>['objectSet'];
 
     readonly fetchOne: <
-      L extends Employee.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends Employee.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[Employee.Definition['primaryKeyType']],
       options?: $SelectArg<Employee.Definition, L, R, S>,
     ) => Promise<
       Employee.OsdkObject<
         (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-        L
+        $IsAny<L> extends true ? Employee.PropertyKeys : L
       >
     >;
 
     readonly fetchOneWithErrors: <
-      L extends Employee.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends Employee.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[Employee.Definition['primaryKeyType']],
       options?: $SelectArg<Employee.Definition, L, R, S>,
@@ -116,32 +117,32 @@ export namespace Employee {
       $Result<
         Employee.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? Employee.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPage: <
-      L extends Employee.PropertyKeys,
-      R extends boolean,
+      const L extends Employee.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<Employee.Definition, L, R, A, S>,
     ) => Promise<
       $PageResult<
         Employee.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? Employee.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPageWithErrors: <
-      L extends Employee.PropertyKeys,
-      R extends boolean,
+      const L extends Employee.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<Employee.Definition, L, R, A, S>,
     ) => Promise<
@@ -149,7 +150,7 @@ export namespace Employee {
         $PageResult<
           Employee.OsdkObject<
             (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-            L
+            $IsAny<L> extends true ? Employee.PropertyKeys : L
           >
         >
       >
@@ -164,6 +165,7 @@ export namespace Employee {
     osdkMetadata: typeof $osdkMetadata;
     objectSet: Employee.ObjectSet;
     props: Employee.Props;
+    linksType: Employee.Links;
     strictProps: Employee.StrictProps;
     description: 'An employee';
     implements: ['FooInterface'];
@@ -268,13 +270,13 @@ export namespace Employee {
     } & $OsdkObject<'Employee'>;
 }
 
-/** @deprecated use Employee.Definition **/
 export type Employee = Employee.Definition;
 
 export const Employee: Employee & $VersionBound<$ExpectedClientVersion> = {
   osdkMetadata: $osdkMetadata,
   objectSet: undefined as any,
   props: undefined as any,
+  linksType: undefined as any,
   strictProps: undefined as any,
   apiName: 'Employee',
   description: 'An employee',

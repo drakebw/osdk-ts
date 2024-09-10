@@ -11,6 +11,7 @@ import type {
   ConvertProps as $ConvertProps,
   DefaultToFalse as $DefaultToFalse,
   FetchPageArgs as $FetchPageArgs,
+  IsAny as $IsAny,
   LinkedType as $LinkedType,
   LinkNames as $LinkNames,
   NullabilityAdherence as $NullabilityAdherence,
@@ -63,7 +64,7 @@ export namespace ObjectTypeWithAllPropertyTypes {
     | 'numericTimeseries'
     | 'stringTimeseries';
 
-  export type Links = never;
+  export type Links = {};
 
   export interface Props {
     readonly attachment: $PropType['attachment'] | undefined;
@@ -134,35 +135,35 @@ export namespace ObjectTypeWithAllPropertyTypes {
 
   export interface ObjectSet
     extends $ObjectSet<ObjectTypeWithAllPropertyTypes.Definition, ObjectTypeWithAllPropertyTypes.ObjectSet> {
-    readonly aggregate: <AO extends $AggregateOpts<ObjectTypeWithAllPropertyTypes.Definition>>(
+    readonly aggregate: <const AO extends $AggregateOpts<ObjectTypeWithAllPropertyTypes.Definition>>(
       req: $AggregateOptsThatErrorsAndDisallowsOrderingWithMultipleGroupBy<
         ObjectTypeWithAllPropertyTypes.Definition,
         AO
       >,
     ) => Promise<$AggregationsResults<ObjectTypeWithAllPropertyTypes.Definition, AO>>;
 
-    readonly pivotTo: <L extends $LinkNames<ObjectTypeWithAllPropertyTypes.Definition>>(
+    readonly pivotTo: <const L extends $LinkNames<ObjectTypeWithAllPropertyTypes.Definition>>(
       type: L,
     ) => $LinkedType<ObjectTypeWithAllPropertyTypes.Definition, L>['objectSet'];
 
     readonly fetchOne: <
-      L extends ObjectTypeWithAllPropertyTypes.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends ObjectTypeWithAllPropertyTypes.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[ObjectTypeWithAllPropertyTypes.Definition['primaryKeyType']],
       options?: $SelectArg<ObjectTypeWithAllPropertyTypes.Definition, L, R, S>,
     ) => Promise<
       ObjectTypeWithAllPropertyTypes.OsdkObject<
         (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-        L
+        $IsAny<L> extends true ? ObjectTypeWithAllPropertyTypes.PropertyKeys : L
       >
     >;
 
     readonly fetchOneWithErrors: <
-      L extends ObjectTypeWithAllPropertyTypes.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends ObjectTypeWithAllPropertyTypes.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[ObjectTypeWithAllPropertyTypes.Definition['primaryKeyType']],
       options?: $SelectArg<ObjectTypeWithAllPropertyTypes.Definition, L, R, S>,
@@ -170,32 +171,32 @@ export namespace ObjectTypeWithAllPropertyTypes {
       $Result<
         ObjectTypeWithAllPropertyTypes.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? ObjectTypeWithAllPropertyTypes.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPage: <
-      L extends ObjectTypeWithAllPropertyTypes.PropertyKeys,
-      R extends boolean,
+      const L extends ObjectTypeWithAllPropertyTypes.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<ObjectTypeWithAllPropertyTypes.Definition, L, R, A, S>,
     ) => Promise<
       $PageResult<
         ObjectTypeWithAllPropertyTypes.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? ObjectTypeWithAllPropertyTypes.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPageWithErrors: <
-      L extends ObjectTypeWithAllPropertyTypes.PropertyKeys,
-      R extends boolean,
+      const L extends ObjectTypeWithAllPropertyTypes.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<ObjectTypeWithAllPropertyTypes.Definition, L, R, A, S>,
     ) => Promise<
@@ -203,7 +204,7 @@ export namespace ObjectTypeWithAllPropertyTypes {
         $PageResult<
           ObjectTypeWithAllPropertyTypes.OsdkObject<
             (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-            L
+            $IsAny<L> extends true ? ObjectTypeWithAllPropertyTypes.PropertyKeys : L
           >
         >
       >
@@ -218,6 +219,7 @@ export namespace ObjectTypeWithAllPropertyTypes {
     osdkMetadata: typeof $osdkMetadata;
     objectSet: ObjectTypeWithAllPropertyTypes.ObjectSet;
     props: ObjectTypeWithAllPropertyTypes.Props;
+    linksType: ObjectTypeWithAllPropertyTypes.Links;
     strictProps: ObjectTypeWithAllPropertyTypes.StrictProps;
     description: 'A type with all property types';
     links: {};
@@ -373,13 +375,13 @@ export namespace ObjectTypeWithAllPropertyTypes {
     } & $OsdkObject<'ObjectTypeWithAllPropertyTypes'>;
 }
 
-/** @deprecated use ObjectTypeWithAllPropertyTypes.Definition **/
 export type ObjectTypeWithAllPropertyTypes = ObjectTypeWithAllPropertyTypes.Definition;
 
 export const ObjectTypeWithAllPropertyTypes: ObjectTypeWithAllPropertyTypes & $VersionBound<$ExpectedClientVersion> = {
   osdkMetadata: $osdkMetadata,
   objectSet: undefined as any,
   props: undefined as any,
+  linksType: undefined as any,
   strictProps: undefined as any,
   apiName: 'ObjectTypeWithAllPropertyTypes',
   description: 'A type with all property types',

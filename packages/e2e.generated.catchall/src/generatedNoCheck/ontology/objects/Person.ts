@@ -12,6 +12,7 @@ import type {
   ConvertProps as $ConvertProps,
   DefaultToFalse as $DefaultToFalse,
   FetchPageArgs as $FetchPageArgs,
+  IsAny as $IsAny,
   LinkedType as $LinkedType,
   LinkNames as $LinkNames,
   NullabilityAdherence as $NullabilityAdherence,
@@ -47,32 +48,32 @@ export namespace Person {
   }
 
   export interface ObjectSet extends $ObjectSet<Person.Definition, Person.ObjectSet> {
-    readonly aggregate: <AO extends $AggregateOpts<Person.Definition>>(
+    readonly aggregate: <const AO extends $AggregateOpts<Person.Definition>>(
       req: $AggregateOptsThatErrorsAndDisallowsOrderingWithMultipleGroupBy<Person.Definition, AO>,
     ) => Promise<$AggregationsResults<Person.Definition, AO>>;
 
-    readonly pivotTo: <L extends $LinkNames<Person.Definition>>(
+    readonly pivotTo: <const L extends $LinkNames<Person.Definition>>(
       type: L,
     ) => $LinkedType<Person.Definition, L>['objectSet'];
 
     readonly fetchOne: <
-      L extends Person.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends Person.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[Person.Definition['primaryKeyType']],
       options?: $SelectArg<Person.Definition, L, R, S>,
     ) => Promise<
       Person.OsdkObject<
         (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-        L
+        $IsAny<L> extends true ? Person.PropertyKeys : L
       >
     >;
 
     readonly fetchOneWithErrors: <
-      L extends Person.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends Person.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[Person.Definition['primaryKeyType']],
       options?: $SelectArg<Person.Definition, L, R, S>,
@@ -80,32 +81,32 @@ export namespace Person {
       $Result<
         Person.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? Person.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPage: <
-      L extends Person.PropertyKeys,
-      R extends boolean,
+      const L extends Person.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<Person.Definition, L, R, A, S>,
     ) => Promise<
       $PageResult<
         Person.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? Person.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPageWithErrors: <
-      L extends Person.PropertyKeys,
-      R extends boolean,
+      const L extends Person.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<Person.Definition, L, R, A, S>,
     ) => Promise<
@@ -113,7 +114,7 @@ export namespace Person {
         $PageResult<
           Person.OsdkObject<
             (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-            L
+            $IsAny<L> extends true ? Person.PropertyKeys : L
           >
         >
       >
@@ -128,6 +129,7 @@ export namespace Person {
     osdkMetadata: typeof $osdkMetadata;
     objectSet: Person.ObjectSet;
     props: Person.Props;
+    linksType: Person.Links;
     strictProps: Person.StrictProps;
     description: 'A person';
     links: {
@@ -162,13 +164,13 @@ export namespace Person {
     } & $OsdkObject<'Person'>;
 }
 
-/** @deprecated use Person.Definition **/
 export type Person = Person.Definition;
 
 export const Person: Person & $VersionBound<$ExpectedClientVersion> = {
   osdkMetadata: $osdkMetadata,
   objectSet: undefined as any,
   props: undefined as any,
+  linksType: undefined as any,
   strictProps: undefined as any,
   apiName: 'Person',
   description: 'A person',

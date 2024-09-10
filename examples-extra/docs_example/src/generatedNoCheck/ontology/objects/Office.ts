@@ -11,6 +11,7 @@ import type {
   ConvertProps as $ConvertProps,
   DefaultToFalse as $DefaultToFalse,
   FetchPageArgs as $FetchPageArgs,
+  IsAny as $IsAny,
   LinkedType as $LinkedType,
   LinkNames as $LinkNames,
   NullabilityAdherence as $NullabilityAdherence,
@@ -38,7 +39,7 @@ export namespace Office {
     | 'meetingRooms'
     | 'meetingRoomCapacities';
 
-  export type Links = never;
+  export type Links = {};
 
   export interface Props {
     readonly entrance: $PropType['geopoint'] | undefined;
@@ -58,32 +59,32 @@ export namespace Office {
   }
 
   export interface ObjectSet extends $ObjectSet<Office.Definition, Office.ObjectSet> {
-    readonly aggregate: <AO extends $AggregateOpts<Office.Definition>>(
+    readonly aggregate: <const AO extends $AggregateOpts<Office.Definition>>(
       req: $AggregateOptsThatErrorsAndDisallowsOrderingWithMultipleGroupBy<Office.Definition, AO>,
     ) => Promise<$AggregationsResults<Office.Definition, AO>>;
 
-    readonly pivotTo: <L extends $LinkNames<Office.Definition>>(
+    readonly pivotTo: <const L extends $LinkNames<Office.Definition>>(
       type: L,
     ) => $LinkedType<Office.Definition, L>['objectSet'];
 
     readonly fetchOne: <
-      L extends Office.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends Office.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[Office.Definition['primaryKeyType']],
       options?: $SelectArg<Office.Definition, L, R, S>,
     ) => Promise<
       Office.OsdkObject<
         (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-        L
+        $IsAny<L> extends true ? Office.PropertyKeys : L
       >
     >;
 
     readonly fetchOneWithErrors: <
-      L extends Office.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends Office.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[Office.Definition['primaryKeyType']],
       options?: $SelectArg<Office.Definition, L, R, S>,
@@ -91,32 +92,32 @@ export namespace Office {
       $Result<
         Office.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? Office.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPage: <
-      L extends Office.PropertyKeys,
-      R extends boolean,
+      const L extends Office.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<Office.Definition, L, R, A, S>,
     ) => Promise<
       $PageResult<
         Office.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? Office.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPageWithErrors: <
-      L extends Office.PropertyKeys,
-      R extends boolean,
+      const L extends Office.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<Office.Definition, L, R, A, S>,
     ) => Promise<
@@ -124,7 +125,7 @@ export namespace Office {
         $PageResult<
           Office.OsdkObject<
             (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-            L
+            $IsAny<L> extends true ? Office.PropertyKeys : L
           >
         >
       >
@@ -139,6 +140,7 @@ export namespace Office {
     osdkMetadata: typeof $osdkMetadata;
     objectSet: Office.ObjectSet;
     props: Office.Props;
+    linksType: Office.Links;
     strictProps: Office.StrictProps;
     description: 'A office in our Company';
     links: {};
@@ -190,13 +192,13 @@ export namespace Office {
     } & $OsdkObject<'Office'>;
 }
 
-/** @deprecated use Office.Definition **/
 export type Office = Office.Definition;
 
 export const Office: Office & $VersionBound<$ExpectedClientVersion> = {
   osdkMetadata: $osdkMetadata,
   objectSet: undefined as any,
   props: undefined as any,
+  linksType: undefined as any,
   strictProps: undefined as any,
   apiName: 'Office',
   description: 'A office in our Company',

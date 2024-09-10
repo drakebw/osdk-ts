@@ -1,5 +1,46 @@
 # @osdk/client
 
+## 0.22.0-beta.5
+
+### Minor Changes
+
+- dc25fb4: Fixes edge cases in inferred return types especially when changing object types
+
+### Patch Changes
+
+- Updated dependencies [dc25fb4]
+  - @osdk/client.api@0.22.0-beta.5
+  - @osdk/api@1.10.0-beta.1
+  - @osdk/generator-converters@0.8.0-beta.1
+
+## 0.22.0-beta.4
+
+### Patch Changes
+
+- Updated dependencies [0ea1a17]
+  - @osdk/client.api@0.22.0-beta.4
+
+## 0.22.0-beta.3
+
+### Patch Changes
+
+- Updated dependencies [7c2db00]
+  - @osdk/api@1.10.0-beta.0
+  - @osdk/client.api@0.22.0-beta.3
+  - @osdk/generator-converters@0.8.0-beta.0
+
+## 0.22.0-beta.2
+
+### Minor Changes
+
+- 68a8dc7: Fixes an issue that could cause an object with sub-selection to be assigned as a full object
+- 081114f: Splits batchApplyAction out of applyAction
+
+### Patch Changes
+
+- Updated dependencies [68a8dc7]
+  - @osdk/client.api@0.22.0-beta.2
+
 ## 0.22.0-beta.1
 
 ### Minor Changes

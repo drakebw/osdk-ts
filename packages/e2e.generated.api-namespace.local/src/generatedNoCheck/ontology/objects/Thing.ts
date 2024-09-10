@@ -11,6 +11,7 @@ import type {
   ConvertProps as $ConvertProps,
   DefaultToFalse as $DefaultToFalse,
   FetchPageArgs as $FetchPageArgs,
+  IsAny as $IsAny,
   LinkedType as $LinkedType,
   LinkNames as $LinkNames,
   NullabilityAdherence as $NullabilityAdherence,
@@ -32,7 +33,7 @@ import { $osdkMetadata } from '../../OntologyMetadata.js';
 export namespace Thing {
   export type PropertyKeys = 'id' | 'body';
 
-  export type Links = never;
+  export type Links = {};
 
   export interface Props {
     readonly body: $PropType['string'] | undefined;
@@ -44,32 +45,32 @@ export namespace Thing {
   }
 
   export interface ObjectSet extends $ObjectSet<Thing.Definition, Thing.ObjectSet> {
-    readonly aggregate: <AO extends $AggregateOpts<Thing.Definition>>(
+    readonly aggregate: <const AO extends $AggregateOpts<Thing.Definition>>(
       req: $AggregateOptsThatErrorsAndDisallowsOrderingWithMultipleGroupBy<Thing.Definition, AO>,
     ) => Promise<$AggregationsResults<Thing.Definition, AO>>;
 
-    readonly pivotTo: <L extends $LinkNames<Thing.Definition>>(
+    readonly pivotTo: <const L extends $LinkNames<Thing.Definition>>(
       type: L,
     ) => $LinkedType<Thing.Definition, L>['objectSet'];
 
     readonly fetchOne: <
-      L extends Thing.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends Thing.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[Thing.Definition['primaryKeyType']],
       options?: $SelectArg<Thing.Definition, L, R, S>,
     ) => Promise<
       Thing.OsdkObject<
         (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-        L
+        $IsAny<L> extends true ? Thing.PropertyKeys : L
       >
     >;
 
     readonly fetchOneWithErrors: <
-      L extends Thing.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends Thing.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[Thing.Definition['primaryKeyType']],
       options?: $SelectArg<Thing.Definition, L, R, S>,
@@ -77,32 +78,32 @@ export namespace Thing {
       $Result<
         Thing.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? Thing.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPage: <
-      L extends Thing.PropertyKeys,
-      R extends boolean,
+      const L extends Thing.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<Thing.Definition, L, R, A, S>,
     ) => Promise<
       $PageResult<
         Thing.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? Thing.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPageWithErrors: <
-      L extends Thing.PropertyKeys,
-      R extends boolean,
+      const L extends Thing.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<Thing.Definition, L, R, A, S>,
     ) => Promise<
@@ -110,7 +111,7 @@ export namespace Thing {
         $PageResult<
           Thing.OsdkObject<
             (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-            L
+            $IsAny<L> extends true ? Thing.PropertyKeys : L
           >
         >
       >
@@ -125,6 +126,7 @@ export namespace Thing {
     osdkMetadata: typeof $osdkMetadata;
     objectSet: Thing.ObjectSet;
     props: Thing.Props;
+    linksType: Thing.Links;
     strictProps: Thing.StrictProps;
     implements: ['com.example.dep.SomeInterface'];
     interfaceMap: {
@@ -172,13 +174,13 @@ export namespace Thing {
     } & $OsdkObject<'Thing'>;
 }
 
-/** @deprecated use Thing.Definition **/
 export type Thing = Thing.Definition;
 
 export const Thing: Thing & $VersionBound<$ExpectedClientVersion> = {
   osdkMetadata: $osdkMetadata,
   objectSet: undefined as any,
   props: undefined as any,
+  linksType: undefined as any,
   strictProps: undefined as any,
   apiName: 'Thing',
   implements: ['com.example.dep.SomeInterface'],

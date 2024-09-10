@@ -11,6 +11,7 @@ import type {
   ConvertProps as $ConvertProps,
   DefaultToFalse as $DefaultToFalse,
   FetchPageArgs as $FetchPageArgs,
+  IsAny as $IsAny,
   LinkedType as $LinkedType,
   LinkNames as $LinkNames,
   NullabilityAdherence as $NullabilityAdherence,
@@ -32,7 +33,7 @@ import { $osdkMetadata } from '../../OntologyMetadata.js';
 export namespace BoundariesUsState {
   export type PropertyKeys = 'usState' | 'latitude' | 'longitude' | 'geometry10M';
 
-  export type Links = never;
+  export type Links = {};
 
   export interface Props {
     readonly geometry10M: $PropType['geoshape'] | undefined;
@@ -48,32 +49,32 @@ export namespace BoundariesUsState {
   }
 
   export interface ObjectSet extends $ObjectSet<BoundariesUsState.Definition, BoundariesUsState.ObjectSet> {
-    readonly aggregate: <AO extends $AggregateOpts<BoundariesUsState.Definition>>(
+    readonly aggregate: <const AO extends $AggregateOpts<BoundariesUsState.Definition>>(
       req: $AggregateOptsThatErrorsAndDisallowsOrderingWithMultipleGroupBy<BoundariesUsState.Definition, AO>,
     ) => Promise<$AggregationsResults<BoundariesUsState.Definition, AO>>;
 
-    readonly pivotTo: <L extends $LinkNames<BoundariesUsState.Definition>>(
+    readonly pivotTo: <const L extends $LinkNames<BoundariesUsState.Definition>>(
       type: L,
     ) => $LinkedType<BoundariesUsState.Definition, L>['objectSet'];
 
     readonly fetchOne: <
-      L extends BoundariesUsState.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends BoundariesUsState.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[BoundariesUsState.Definition['primaryKeyType']],
       options?: $SelectArg<BoundariesUsState.Definition, L, R, S>,
     ) => Promise<
       BoundariesUsState.OsdkObject<
         (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-        L
+        $IsAny<L> extends true ? BoundariesUsState.PropertyKeys : L
       >
     >;
 
     readonly fetchOneWithErrors: <
-      L extends BoundariesUsState.PropertyKeys,
-      R extends boolean,
-      S extends false | 'throw' = $NullabilityAdherenceDefault,
+      const L extends BoundariesUsState.PropertyKeys,
+      const R extends boolean,
+      const S extends false | 'throw' = $NullabilityAdherenceDefault,
     >(
       primaryKey: $PropertyValueClientToWire[BoundariesUsState.Definition['primaryKeyType']],
       options?: $SelectArg<BoundariesUsState.Definition, L, R, S>,
@@ -81,32 +82,32 @@ export namespace BoundariesUsState {
       $Result<
         BoundariesUsState.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? BoundariesUsState.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPage: <
-      L extends BoundariesUsState.PropertyKeys,
-      R extends boolean,
+      const L extends BoundariesUsState.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<BoundariesUsState.Definition, L, R, A, S>,
     ) => Promise<
       $PageResult<
         BoundariesUsState.OsdkObject<
           (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-          L
+          $IsAny<L> extends true ? BoundariesUsState.PropertyKeys : L
         >
       >
     >;
 
     readonly fetchPageWithErrors: <
-      L extends BoundariesUsState.PropertyKeys,
-      R extends boolean,
+      const L extends BoundariesUsState.PropertyKeys,
+      const R extends boolean,
       const A extends $Augments,
-      S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
+      const S extends $NullabilityAdherence = $NullabilityAdherenceDefault,
     >(
       args?: $FetchPageArgs<BoundariesUsState.Definition, L, R, A, S>,
     ) => Promise<
@@ -114,7 +115,7 @@ export namespace BoundariesUsState {
         $PageResult<
           BoundariesUsState.OsdkObject<
             (S extends false ? '$notStrict' : never) | ($DefaultToFalse<R> extends false ? never : '$rid'),
-            L
+            $IsAny<L> extends true ? BoundariesUsState.PropertyKeys : L
           >
         >
       >
@@ -129,6 +130,7 @@ export namespace BoundariesUsState {
     osdkMetadata: typeof $osdkMetadata;
     objectSet: BoundariesUsState.ObjectSet;
     props: BoundariesUsState.Props;
+    linksType: BoundariesUsState.Links;
     strictProps: BoundariesUsState.StrictProps;
     description: 'Boundaries US State';
     links: {};
@@ -177,13 +179,13 @@ export namespace BoundariesUsState {
     } & $OsdkObject<'BoundariesUsState'>;
 }
 
-/** @deprecated use BoundariesUsState.Definition **/
 export type BoundariesUsState = BoundariesUsState.Definition;
 
 export const BoundariesUsState: BoundariesUsState & $VersionBound<$ExpectedClientVersion> = {
   osdkMetadata: $osdkMetadata,
   objectSet: undefined as any,
   props: undefined as any,
+  linksType: undefined as any,
   strictProps: undefined as any,
   apiName: 'BoundariesUsState',
   description: 'Boundaries US State',

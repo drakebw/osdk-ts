@@ -1,5 +1,17 @@
 # @osdk/api
 
+## 1.10.0-beta.1
+
+### Minor Changes
+
+- dc25fb4: Fixes edge cases in inferred return types especially when changing object types
+
+## 1.10.0-beta.0
+
+### Minor Changes
+
+- 7c2db00: Updates QueryDefinition to include an optional generic argument
+
 ## 1.9.0
 
 ### Minor Changes
